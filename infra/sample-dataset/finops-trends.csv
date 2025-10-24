@@ -1,0 +1,6 @@
+Year,Category,Spend_USD,Optimization_Score,Notes
+2023,Compute,120000,0.67,High spot usage potential
+2023,Storage,80000,0.78,Cold-tier migration recommended
+2024,Compute,135000,0.72,Add autoscaling policy
+2024,Networking,45000,0.63,Idle bandwidth detected
+2025,AI_Services,98000,0.88,Vertex AI used efficiently

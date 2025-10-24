@@ -1,0 +1,63 @@
+# --- Line ending normalization ---
+# Auto-detect text files and ensure LF line endings in the repo
+* text=auto eol=lf
+
+# --- Code files ---
+*.py text eol=lf diff=python
+*.ts text eol=lf diff=typescript
+*.tsx text eol=lf diff=typescript
+*.js text eol=lf diff=javascript
+*.jsx text eol=lf diff=javascript
+*.json text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+Dockerfile text eol=lf
+
+# --- Data / Docs ---
+*.csv text eol=lf
+*.env text eol=lf
+*.ini text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
+*.rtf text eol=crlf
+
+# --- Binary assets (no diffs) ---
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.7z binary
+*.tar binary
+*.gz binary
+*.mp4 binary
+*.mov binary
+*.wav binary
+*.mp3 binary
+*.otf binary
+*.ttf binary
+
+# --- Design / Diagrams / Spreadsheets ---
+*.drawio binary
+*.drawio.png binary
+*.xlsx binary
+*.xlsm binary
+*.xls binary
+*.pptx binary
+*.docx binary
+
+# --- GitHub linguist tweaks ---
+# Treat .drawio as documentation, not code
+*.drawio linguist-documentation
+*.md linguist-documentation
+*.csv linguist-data
+*.json linguist-data

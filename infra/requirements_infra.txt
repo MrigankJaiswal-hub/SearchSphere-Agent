@@ -1,0 +1,7 @@
+elasticsearch>=8.12.0
+pdfminer.six
+pandas
+requests
+python-dotenv
+google-cloud-aiplatform
+google-auth

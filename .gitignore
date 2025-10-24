@@ -1,0 +1,92 @@
+# --- General ---
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.env
+.env.*
+*.sqlite3
+*.db
+*.json
+*.lock
+.vscode/
+.idea/
+*.pid
+
+# --- Backend (FastAPI / Python) ---
+backend/.venv/
+backend/venv/
+backend/__pycache__/
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.coverage
+backend/htmlcov/
+backend/.python-version
+backend/*.egg-info/
+backend/service_account.json  # never upload keys
+backend/.env
+backend/.env.local
+
+# --- Frontend (Next.js / Node.js) ---
+web/node_modules/
+web/.next/
+web/.vercel/
+web/.env.local
+web/.env
+web/.env.production
+web/.eslintcache
+web/out/
+web/.turbo/
+web/yarn-error.log
+web/pnpm-lock.yaml
+web/package-lock.json
+
+# --- Deployment / Cache ---
+*.cache
+.cache/
+dist/
+build/
+tmp/
+logs/
+coverage/
+
+# --- OS / IDE extras ---
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+*.iml
+*.class
+*.exe
+*.dll
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.bak
+*.orig
+
+# --- Misc optional ---
+# Jupyter / notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Draw.io / design autosaves
+*.bkp
+*.autosave
+*.~drawio
+*.drawio.bak
+
+# --- Personal workspace ---
+/demoscripts.md
+/evaluationmatrix.xlsx
+/Readme_diagram.drawio

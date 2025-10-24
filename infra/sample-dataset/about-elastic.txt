@@ -1,0 +1,7 @@
+Elastic Search AI allows hybrid retrieval combining traditional BM25 keyword search 
+with vector-based semantic search for deep contextual understanding. It is optimized 
+for real-time analytics, security, and observability use cases, and can integrate 
+with Vertex AI embeddings to deliver human-like search experiences.
+
+This sample text demonstrates how the ingestion pipeline chunks text, creates embeddings, 
+and indexes them into Elastic for hybrid retrieval during RAG workflows.
