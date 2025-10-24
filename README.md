@@ -1,8 +1,3 @@
-Here’s a **fully structured README.md** you can copy-paste directly into your repo — it’s properly sectioned, formatted, and uses consistent Markdown style:
-
----
-
-```markdown
 # 🔍 SearchSphere Agent
 
 **An AI-powered hybrid search and labeling assistant** that fuses **Elastic Cloud BM25 + kNN** retrieval with **Google Vertex AI Gemini 2.0 reasoning** — built to revolutionize enterprise knowledge search and evaluation.
@@ -45,6 +40,9 @@ It helps teams and enterprises **find smarter, label faster, and evaluate effici
 - 🔐 **Cloud Ready** — Dockerized backend, deployed via Google Cloud Run + Netlify.  
 
 ---
+
+
+
 
 ## 🏗️ Architecture
 
@@ -257,6 +255,7 @@ This project is licensed under the **MIT License**.
 
 Would you like me to generate a **short version (under 1 page)** specifically formatted for Devpost “Project Documentation” too?
 ```
+
 
 
 
