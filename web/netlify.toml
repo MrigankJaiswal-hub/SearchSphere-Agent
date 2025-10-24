@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[redirects]]
+  from = "/api/*"
+  to   = "https://searchsphere-backend-527375959391.us-central1.run.app/api/:splat"
+  status = 200
+  force  = true
