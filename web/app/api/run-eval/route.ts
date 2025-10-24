@@ -1,6 +1,7 @@
+// app/api/run-eval/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
-const BASE = process.env.BACKEND_API_BASE || "http://127.0.0.1:8080";
+const PUBLIC_BASE = process.env.NEXT_PUBLIC_API_BASE || ""; // e.g. https://searchsphere-backend-...run.app
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,12 +12,16 @@ export async function POST(req: NextRequest) {
       try {
         payload = JSON.parse(text);
       } catch {
-        // If body wasn't JSON, forward raw text as-is
-        payload = text;
+        payload = text; // forward raw text if not JSON
       }
     }
 
-    const resp = await fetch(new URL("/api/eval/precision", BASE), {
+    // If PUBLIC_BASE is set, hit backend directly; else rely on Netlify proxy at /api/*
+    const url = PUBLIC_BASE
+      ? `${PUBLIC_BASE}/api/eval/precision`
+      : `/api/eval/precision`;
+
+    const resp = await fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: typeof payload === "string" ? payload : JSON.stringify(payload),
@@ -29,7 +34,6 @@ export async function POST(req: NextRequest) {
         .json()
         .catch(async () => await resp.text())) ?? {};
 
-    // Mirror backend status but avoid throwing on errors
     if (typeof data === "string") {
       return new NextResponse(data, {
         status: resp.status,
