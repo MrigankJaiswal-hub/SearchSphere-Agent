@@ -21,9 +21,7 @@ module.exports = {
         "2xl": "1rem"
       },
       keyframes: {
-        shimmer: {
-          "100%": { transform: "translateX(100%)" }
-        }
+        shimmer: { "100%": { transform: "translateX(100%)" } }
       },
       animation: {
         shimmer: "shimmer 1.35s infinite"
