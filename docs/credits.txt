@@ -1,7 +1,7 @@
 CREDITS
 
 SearchSphere Agent was conceived, designed, and developed by:
-- **Mrigank Jaiswal**, B.Tech ECE, IET Lucknow
+- **Mrigank Jaiswal**, B.Tech 
 
 Hackathon Context:
 - Built for the **Google Cloud AI Accelerate Hackathon / Elastic Hybrid Search Challenge**
