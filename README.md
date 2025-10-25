@@ -237,7 +237,6 @@ p50: 730 ms | p95: 1100 ms | Precision@10: 0.86
 ## 👨‍💻 Contributors
 
 **Mrigank Jaiswal**
-*B.Tech in ECE | AI/ML & Cloud Enthusiast*
 🖥️ Built full-stack architecture, Elastic-Vertex integration, frontend UI, and deployment automation.
 
 ---
@@ -250,11 +249,8 @@ This project is licensed under the **MIT License**.
 ---
 
 ```
-
----
-
-Would you like me to generate a **short version (under 1 page)** specifically formatted for Devpost “Project Documentation” too?
 ```
+
 
 
 
