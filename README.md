@@ -241,7 +241,7 @@ p50: 730 ms | p95: 1100 ms | Precision@10: 0.86
 
 ---
 
-## 🪪 License
+##  License
 
 This project is licensed under the **MIT License**.
 © 2025 Mrigank Jaiswal
@@ -250,6 +250,7 @@ This project is licensed under the **MIT License**.
 
 ```
 ```
+
 
 
 
