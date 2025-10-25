@@ -200,7 +200,7 @@ gcloud run deploy searchsphere-backend \
 | `.github/workflows/` | Optional CI/CD (for extra points, not required for Netlify) | Optional ✅ |
 | `.env.example` | Example env vars | ✅ |
 | `LICENSE` | MIT License | ✅ |
-| `README.md` | Judge-friendly overview | ✅ |
+| `README.md` |  Overview | ✅ |
 
 ---
 
