@@ -1,0 +1,79 @@
+name: Deploy Backend (Cloud Run)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "backend/**"
+      - ".github/workflows/deploy-backend.yml"
+      - "Dockerfile"
+      - "backend.Dockerfile"
+      - "infra/**"
+  workflow_dispatch:
+
+env:
+  SERVICE: ${{ secrets.CLOUD_RUN_SERVICE }}
+  REGION: ${{ secrets.GCP_REGION }}
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REPO: ${{ secrets.GAR_REPO }}
+  IMAGE: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPO }}/${{ secrets.CLOUD_RUN_SERVICE }}:${{ github.sha }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Google Auth (Workload Identity)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+
+      - name: Configure Docker auth to Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Build (Docker)
+        run: |
+          docker build \
+            -f backend/Dockerfile \
+            -t $IMAGE \
+            ./backend
+
+      - name: Push image
+        run: docker push $IMAGE
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy $SERVICE \
+            --image $IMAGE \
+            --region $REGION \
+            --platform managed \
+            --allow-unauthenticated \
+            --min-instances=1 \
+            --max-instances=3 \
+            --concurrency=80 \
+            --set-env-vars ELASTIC_CLOUD_ID=${{ secrets.ELASTIC_CLOUD_ID }} \
+            --set-env-vars ELASTIC_API_KEY=${{ secrets.ELASTIC_API_KEY }} \
+            --set-env-vars ELASTIC_INDEX=searchsphere_docs \
+            --set-env-vars GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }} \
+            --set-env-vars VERTEX_LOCATION=${{ secrets.GCP_REGION }} \
+            --set-env-vars VERTEX_EMBED_MODEL=text-embedding-005 \
+            --set-env-vars VERTEX_CHAT_MODEL=gemini-2.0-flash-001 \
+            --set-env-vars ES_KNN_NUM_CANDIDATES=120 \
+            --set-env-vars BUILD_SHA=${{ github.sha }} \
+            --set-env-vars DEMO_RESULTS=1 \
+            --set-env-vars CORS_ORIGIN=${{ secrets.CORS_ORIGIN || '*' }}
+
+      - name: Output URL
+        run: gcloud run services describe $SERVICE --region $REGION --format='value(status.url)'

@@ -1,18 +1,28 @@
 // web/lib/api.ts
 import { ChatRequest, ChatResponse, SearchRequest, SearchResponse } from "./types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || ""; // e.g. https://searchsphere-backend-...run.app
+function normalizeBase(v?: string) {
+  if (!v) return "";
+  let s = v.trim();
+  if (s.endsWith("/")) s = s.slice(0, -1);
+  if (s.toLowerCase().endsWith("/api")) s = s.slice(0, -4);
+  return s;
+}
 
-function api(path: string) {
-  // If a backend base is set, call it directly; else rely on Netlify proxy (/api/*)
-  return API_BASE ? `${API_BASE}${path}` : `/api${path}`;
+const PUBLIC_BASE = normalizeBase(process.env.NEXT_PUBLIC_API_BASE);
+
+// If PUBLIC_BASE is set, call backend directly; otherwise use Next.js proxy routes.
+function apiUrl(path: string) {
+  // `path` like "/search", "/chat", "/metrics", "/run-eval"
+  if (PUBLIC_BASE) return `${PUBLIC_BASE}/api${path}`;
+  return `/api${path}`; // Next app route proxies locally
 }
 
 export async function apiSearch(
   payload: SearchRequest,
   abortSignal?: AbortSignal
 ): Promise<SearchResponse> {
-  const url = api("/api/search");
+  const url = apiUrl("/search");
   const t0 = performance.now?.() ?? Date.now();
   const res = await fetch(url, {
     method: "POST",
@@ -30,7 +40,7 @@ export async function apiChat(
   payload: ChatRequest,
   abortSignal?: AbortSignal
 ): Promise<ChatResponse & { __latency_ms: number }> {
-  const url = api("/api/chat");
+  const url = apiUrl("/chat");
   const t0 = performance.now?.() ?? Date.now();
   const res = await fetch(url, {
     method: "POST",
@@ -44,7 +54,7 @@ export async function apiChat(
 }
 
 export async function apiMetrics(): Promise<{ search: any; chat: any; eval?: any }> {
-  const url = api("/api/metrics");
+  const url = apiUrl("/metrics");
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Metrics failed: ${res.status}`);
   return res.json();
@@ -53,8 +63,13 @@ export async function apiMetrics(): Promise<{ search: any; chat: any; eval?: any
 export async function apiRunEval(
   payload: unknown
 ): Promise<{ k: number; p_at_k: number; queries: number }> {
-  // Backend route is /api/eval/precision (not /api/run-eval)
-  const url = api("/api/eval/precision");
+  // IMPORTANT:
+  // - In production (PUBLIC_BASE present), call backend's real endpoint: /api/eval/precision
+  // - Locally (no PUBLIC_BASE), call the Next.js proxy route: /api/run-eval
+  const url = PUBLIC_BASE
+    ? `${PUBLIC_BASE}/api/eval/precision`
+    : `/api/run-eval`;
+
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

@@ -14,11 +14,17 @@ type Candidate = {
 };
 
 async function fetchCandidates(query: string, k: number) {
-  const res = await fetch("/api/label-assist", {
+  const base = process.env.NEXT_PUBLIC_API_BASE || "";
+  const url = base
+    ? `${base}/api/eval/label-assist`
+    : `/api/eval/label-assist`; // Netlify proxy fallback
+
+  const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query, k }),
   });
+
   if (!res.ok) throw new Error(`Label assist failed: ${res.status}`);
   return (await res.json()) as {
     query: string;
@@ -26,6 +32,7 @@ async function fetchCandidates(query: string, k: number) {
     candidates: Candidate[];
   };
 }
+
 
 function download(filename: string, text: string) {
   const blob = new Blob([text], { type: "application/json" });
