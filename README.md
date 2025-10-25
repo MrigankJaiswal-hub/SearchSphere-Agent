@@ -171,17 +171,17 @@ gcloud run deploy searchsphere-backend \
 
 3️⃣ Demo Workflow
 
-Visit your deployed frontend.
+1. Visit your deployed frontend.
 
-Enter a natural language query (e.g., “What is hybrid search?”).
+2. Enter a natural language query (e.g., “What is hybrid search?”).
 
-Observe semantic + lexical search fusion results.
+3. Observe semantic + lexical search fusion results.
 
-View real-time precision and latency metrics.
+4. View real-time precision and latency metrics.
 
-Go to Label Assist, input a query, and export groundtruth.json.
+5. Go to Label Assist, input a query, and export groundtruth.json.
 
-Upload groundtruth.json in Run Evaluation to compute P@K.
+6. Upload groundtruth.json in Run Evaluation to compute P@K.
 
 
 
@@ -275,7 +275,8 @@ p50: 730 ms | p95: 1100 ms | Precision@10: 0.86
 ## 👨‍💻 Contributors
 
 **Mrigank Jaiswal**
-*B.Tech 
+*B.Tech* 
+
 🖥️ Built full-stack architecture, Elastic-Vertex integration, frontend UI, and deployment automation.
 
 ---
