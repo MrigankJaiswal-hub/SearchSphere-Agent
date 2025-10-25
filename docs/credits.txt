@@ -1,0 +1,28 @@
+CREDITS
+
+SearchSphere Agent was conceived, designed, and developed by:
+- **Mrigank Jaiswal**, B.Tech ECE, IET Lucknow
+
+Hackathon Context:
+- Built for the **Google Cloud AI Accelerate Hackathon / Elastic Hybrid Search Challenge**
+- Category: AI Agent + Hybrid Search System
+- Duration: 2 weeks (concept to working prototype)
+
+Special Thanks:
+- **Google Cloud** for Vertex AI Gemini 2.0 and Embeddings API
+- **Elastic Cloud** for BM25 + kNN hybrid retrieval
+- **FastAPI** and **Next.js** open-source communities
+- **Netlify** and **Cloud Run** for deployment infrastructure
+
+Mentorship & Guidance:
+- Mentors and community moderators of the hackathon for technical direction
+- Peer reviewers and contributors for testing and feedback
+
+Tools & Libraries:
+- Python (FastAPI, Uvicorn)
+- Node.js (Next.js 14, React 18, Tailwind CSS)
+- Google Vertex AI SDK
+- Elastic Search Python Client
+- Recharts, Zustand, TypeScript
+
+© 2025 SearchSphere Agent Project. All rights reserved.

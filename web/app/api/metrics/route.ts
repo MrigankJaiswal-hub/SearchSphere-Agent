@@ -1,3 +1,4 @@
+// web/app/api/metrics/route.ts
 import { NextResponse } from "next/server";
 import { getBackendBase } from "../_backend";
 
@@ -10,6 +11,9 @@ export async function GET() {
     const data = await r.json().catch(() => ({}));
     return NextResponse.json(data, { status: r.status });
   } catch (err: any) {
-    return NextResponse.json({ error: err?.message ?? "proxy_failed" }, { status: 500 });
+    return NextResponse.json(
+      { error: err?.message ?? "proxy_failed" },
+      { status: 500 }
+    );
   }
 }
