@@ -1,6 +1,8 @@
 # name: Deploy Backend (Cloud Run)
 
-# on:
+on:
+  workflow_dispatch:
+
 #   push:
 #     branches: [ main ]
 #     paths:
