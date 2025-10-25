@@ -1,83 +1,83 @@
-name: Auto Docs (GitHub Pages)
+# name: Auto Docs (GitHub Pages)
 
-on:
-  push:
-    branches: [ main ]
-    paths:
-      - "README.md"
-      - "docs/**"
-      - ".github/workflows/auto-docs.yml"
-  workflow_dispatch:
+# on:
+#   push:
+#     branches: [ main ]
+#     paths:
+#       - "README.md"
+#       - "docs/**"
+#       - ".github/workflows/auto-docs.yml"
+#   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+#       - name: Setup Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.11"
 
-      - name: Install mkdocs
-        run: |
-          pip install mkdocs mkdocs-material
+#       - name: Install mkdocs
+#         run: |
+#           pip install mkdocs mkdocs-material
 
-      - name: Prepare mkdocs.yml (if missing)
-        run: |
-          if [ ! -f mkdocs.yml ]; then
-            cat > mkdocs.yml <<'YAML'
-site_name: SearchSphere Agent Docs
-nav:
-  - Home: index.md
-  - Backend:
-      - API: docs/backend.md
-  - Web:
-      - Overview: docs/web.md
-theme:
-  name: material
-markdown_extensions:
-  - toc:
-      permalink: true
-  - admonition
-  - codehilite
-  - footnotes
-  - tables
-YAML
-          fi
-          mkdir -p docs
-          # Ensure README becomes homepage
-          cp README.md index.md || true
-          # Create stubs if missing
-          [ -f docs/backend.md ] || echo "# Backend\n\nAPI, routes, and deployment notes." > docs/backend.md
-          [ -f docs/web.md ] || echo "# Web\n\nNext.js frontend, envs, and deployment notes." > docs/web.md
+#       - name: Prepare mkdocs.yml (if missing)
+#         run: |
+#           if [ ! -f mkdocs.yml ]; then
+#             cat > mkdocs.yml <<'YAML'
+# site_name: SearchSphere Agent Docs
+# nav:
+#   - Home: index.md
+#   - Backend:
+#       - API: docs/backend.md
+#   - Web:
+#       - Overview: docs/web.md
+# theme:
+#   name: material
+# markdown_extensions:
+#   - toc:
+#       permalink: true
+#   - admonition
+#   - codehilite
+#   - footnotes
+#   - tables
+# YAML
+#           fi
+#           mkdir -p docs
+#           # Ensure README becomes homepage
+#           cp README.md index.md || true
+#           # Create stubs if missing
+#           [ -f docs/backend.md ] || echo "# Backend\n\nAPI, routes, and deployment notes." > docs/backend.md
+#           [ -f docs/web.md ] || echo "# Web\n\nNext.js frontend, envs, and deployment notes." > docs/web.md
 
-      - name: Build site
-        run: mkdocs build --clean
+#       - name: Build site
+#         run: mkdocs build --clean
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
+#       - name: Upload artifact
+#         uses: actions/upload-pages-artifact@v3
+#         with:
+#           path: site
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+#   deploy:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     permissions:
+#       pages: write
+#       id-token: write
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+#     steps:
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v4
