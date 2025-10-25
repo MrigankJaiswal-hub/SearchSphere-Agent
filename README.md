@@ -169,6 +169,44 @@ gcloud run deploy searchsphere-backend \
 
 ---
 
+3️⃣ Demo Workflow
+
+Visit your deployed frontend.
+
+Enter a natural language query (e.g., “What is hybrid search?”).
+
+Observe semantic + lexical search fusion results.
+
+View real-time precision and latency metrics.
+
+Go to Label Assist, input a query, and export groundtruth.json.
+
+Upload groundtruth.json in Run Evaluation to compute P@K.
+
+
+
+---
+
+### ✅ Files checklist (so judges see a complete, clean repo)
+
+| Folder/File | Purpose | Status |
+|--------------|----------|--------|
+| `/backend` | FastAPI backend | ✅ |
+| `/web` | Next.js frontend | ✅ |
+| `/docs` | Documentation (README, credits, architecture, eval_matrix.xlsx) | ✅ |
+| `/docs/credits.txt` | Acknowledgments | ✅ |
+| `/docs/evaluation_matrix.xlsx` | Metrics template | ✅ |
+| `/docs/diagram.png` | Architecture diagram (export from draw.io / Lucidchart) | ✅ |
+| `.github/workflows/` | Optional CI/CD (for extra points, not required for Netlify) | Optional ✅ |
+| `.env.example` | Example env vars | ✅ |
+| `LICENSE` | MIT License | ✅ |
+| `README.md` | Judge-friendly overview | ✅ |
+
+---
+
+
+
+
 ## 🧠 Usage
 
 * `/` → Main chat & hybrid search page
