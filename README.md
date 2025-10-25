@@ -169,7 +169,7 @@ gcloud run deploy searchsphere-backend \
 
 ---
 
-3️⃣ Demo Workflow
+### Demo Workflow
 
 1. Visit your deployed frontend.
 
