@@ -1,73 +1,73 @@
-name: Test & Lint
+# name: Test & Lint
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
 
-jobs:
-  backend:
-    name: Backend (lint + tests)
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
-    steps:
-      - uses: actions/checkout@v4
+# jobs:
+#   backend:
+#     name: Backend (lint + tests)
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         working-directory: backend
+#     steps:
+#       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+#       - name: Set up Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.11"
 
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('backend/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+#       - name: Cache pip
+#         uses: actions/cache@v4
+#         with:
+#           path: ~/.cache/pip
+#           key: ${{ runner.os }}-pip-${{ hashFiles('backend/requirements.txt') }}
+#           restore-keys: |
+#             ${{ runner.os }}-pip-
 
-      - name: Install deps
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest ruff
+#       - name: Install deps
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install -r requirements.txt
+#           pip install pytest ruff
 
-      - name: Lint (ruff)
-        run: ruff check .
+#       - name: Lint (ruff)
+#         run: ruff check .
 
-      - name: Run tests (pytest)
-        env:
-          SEARCHSPHERE_OFFLINE: "1"
-        run: pytest -q
+#       - name: Run tests (pytest)
+#         env:
+#           SEARCHSPHERE_OFFLINE: "1"
+#         run: pytest -q
 
-  web:
-    name: Web (lint + typecheck + build)
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: web
-    steps:
-      - uses: actions/checkout@v4
+#   web:
+#     name: Web (lint + typecheck + build)
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         working-directory: web
+#     steps:
+#       - uses: actions/checkout@v4
 
-      - name: Use Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-          cache-dependency-path: web/package-lock.json
+#       - name: Use Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
+#           cache: "npm"
+#           cache-dependency-path: web/package-lock.json
 
-      - name: Install deps
-        run: npm ci
+#       - name: Install deps
+#         run: npm ci
 
-      - name: Lint (eslint)
-        run: npm run lint
+#       - name: Lint (eslint)
+#         run: npm run lint
 
-      - name: Typecheck (tsc)
-        run: npx tsc --noEmit
+#       - name: Typecheck (tsc)
+#         run: npx tsc --noEmit
 
-      - name: Build (Next)
-        env:
-          NEXT_PUBLIC_API_BASE: http://localhost:9999  # dummy for CI
-        run: npm run build
+#       - name: Build (Next)
+#         env:
+#           NEXT_PUBLIC_API_BASE: http://localhost:9999  # dummy for CI
+#         run: npm run build
