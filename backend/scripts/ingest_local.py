@@ -1,5 +1,4 @@
 # backend/scripts/ingest_local.py
-# backend/scripts/ingest_local.py
 """
 Ingest local PDF/CSV/TXT into Elasticsearch with Vertex embeddings (text-embedding-005).
 Creates chunks, embeds, and indexes docs with a 'vector' field (dims=768).
