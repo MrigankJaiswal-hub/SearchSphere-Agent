@@ -1,7 +1,5 @@
 # backend/services/elastic_client.py
 # Init, bulk ops, and search helpers (BM25 + kNN) for Elasticsearch.
-# backend/services/elastic_client.py
-# Init, bulk ops, and search helpers (BM25 + kNN) for Elasticsearch.
 
 import os
 from datetime import datetime
