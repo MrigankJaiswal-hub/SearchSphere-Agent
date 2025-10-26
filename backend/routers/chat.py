@@ -1,5 +1,3 @@
-# /api/chat    (RAG + Gemini)
-# /api/chat    (RAG + Gemini with graceful fallback)
 # /api/chat    (RAG + Gemini with graceful fallback)
 # backend/routers/chat.py
 from __future__ import annotations
