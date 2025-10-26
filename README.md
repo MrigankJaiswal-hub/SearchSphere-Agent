@@ -187,7 +187,7 @@ gcloud run deploy searchsphere-backend \
 
 ---
 
-### ✅ Files checklist (so judges see a complete, clean repo)
+### ✅ Files checklist 
 
 | Folder/File | Purpose | Status |
 |--------------|----------|--------|
@@ -197,7 +197,7 @@ gcloud run deploy searchsphere-backend \
 | `/docs/credits.txt` | Acknowledgments | ✅ |
 | `/docs/evaluation_matrix.xlsx` | Metrics template | ✅ |
 | `/docs/diagram.png` | Architecture diagram (export from draw.io / Lucidchart) | ✅ |
-| `.github/workflows/` | Optional CI/CD (for extra points, not required for Netlify) | Optional ✅ |
+| `.github/workflows/` | Optional CI/CD  | Optional ✅ |
 | `.env.example` | Example env vars | ✅ |
 | `LICENSE` | MIT License | ✅ |
 | `README.md` |  Overview | ✅ |
